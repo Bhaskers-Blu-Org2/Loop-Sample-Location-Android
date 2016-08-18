@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:customTextView="https://schemas.android.com/apk/res/trips.sampleapp.loop.ms.tripssampleapp.utils"
     android:id="@+id/listcontainer"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -29,24 +30,26 @@
                 android:src="@drawable/home"
                 android:layout_gravity="center"/>
 
-            <TextView
+            <sampleapp.loop.ms.locations.utils.CustomTextView
                 android:id="@+id/locationName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/locationview_title"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textSize="13sp"
+                android:textColor="@color/locationname"
+                customTextView:fontName="Roboto-Regular"
                 android:paddingLeft="5dp"/>
         </LinearLayout>
 
-        <TextView
+        <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/txtlastvisited"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:paddingTop="5dp"
             android:text="@string/locationview_title"
-            android:textColor="#000000"
-            android:textSize="12sp" />
+            android:textColor="@color/locationvisittime"
+            android:textSize="12sp"
+            customTextView:fontName="Roboto-Regular"/>
     </LinearLayout>
 
     <LinearLayout
@@ -54,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingRight="15dp"
+        android:paddingRight="18dp"
         android:layout_toLeftOf="@+id/RelativeLayout03"
         android:layout_alignBottom="@+id/RelativeLayout01"
         android:paddingTop="7dp"
@@ -68,14 +71,16 @@
             android:layout_gravity="center"
             />
 
-        <TextView
+        <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/lastvisitentertime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:text="@string/locationview_lat_long"
             android:layout_gravity="bottom"
-            android:paddingLeft="3dp" />
+            android:paddingLeft="3dp"
+            android:textColor="@color/locationvisittime"
+            customTextView:fontName="Roboto-Regular"/>
 
         <!-- icon -->
         <ImageView
@@ -84,7 +89,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/small_arrow"
             android:layout_gravity="center"
-            android:paddingLeft="8dp"/>
+            android:paddingLeft="10dp"/>
 
         <ImageView
             android:id="@+id/exitIcon"
@@ -92,16 +97,18 @@
             android:layout_height="wrap_content"
             android:src="@drawable/to_circle"
             android:layout_gravity="center"
-            android:paddingLeft="8dp"/>
+            android:paddingLeft="10dp"/>
 
-        <TextView
+        <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/lastvisitexittime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/locationview_last_updated"
             android:textSize="12sp"
             android:layout_gravity="bottom"
-            android:paddingLeft="3dp"/>
+            android:paddingLeft="3dp"
+            android:textColor="@color/locationvisittime"
+            customTextView:fontName="Roboto-Regular"/>
 
         <!-- icon -->
         <ImageView
@@ -110,16 +117,18 @@
             android:layout_height="wrap_content"
             android:src="@drawable/duration"
             android:layout_gravity="center"
-            android:paddingLeft="5dp"/>
+            android:paddingLeft="9dp"/>
 
-        <TextView
+        <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/visitduration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/locationview_score"
             android:textSize="12sp"
             android:layout_gravity="bottom"
-            android:paddingLeft="3dp"/>
+            android:paddingLeft="3dp"
+            android:textColor="@color/locationvisittime"
+            customTextView:fontName="Roboto-Regular"/>
 
     </LinearLayout>
 
@@ -134,26 +143,29 @@
         android:paddingBottom="7dp"
         >
 
-        <TextView
+        <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/visitcount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/locationview_list_of_visits"
-            android:textSize="24sp"
+            android:textSize="25sp"
             android:textAlignment="center"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:textStyle="bold"/>
+            android:textColor="@color/visitcount"
+            customTextView:fontName="Roboto-Regular"/>
 
-        <TextView
+        <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/visitlable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/locationview_visit"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            android:textColor="@color/visitcount"
             android:textAlignment="center"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp"/>
+            android:paddingRight="5dp"
+            customTextView:fontName="Roboto-Light"/>
 
     </LinearLayout>
 </RelativeLayout>

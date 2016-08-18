@@ -33,7 +33,7 @@
     <string name="locationview_score">score</string>
     <string name="locationview_last_updated">last updated</string>
     <string name="locationview_lat_long">lat long</string>
-    <string name="locationview_title">Title</string>
+    <string name="locationview_title">Location</string>
 
 
     <string name="clearalllocations">CLEAR ALL LOCATIONS</string>

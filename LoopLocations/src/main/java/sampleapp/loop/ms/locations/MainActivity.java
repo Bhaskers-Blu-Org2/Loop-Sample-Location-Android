@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,6 +45,7 @@ import ms.loop.loopsdk.profile.Label;
 import ms.loop.loopsdk.profile.Labels;
 import ms.loop.loopsdk.profile.Locations;
 import ms.loop.loopsdk.profile.LoopLocale;
+import ms.loop.loopsdk.providers.LoopLocationProvider;
 import ms.loop.loopsdk.util.LoopError;
 import sampleapp.loop.ms.locations.utils.ViewUtils;
 
@@ -52,14 +55,14 @@ public class MainActivity extends AppCompatActivity
     private BroadcastReceiver mReceiver;
     private LocationsViewAdapter adapter;
     private ListView tripListView;
- //   private Switch locationSwitch;
-    private TextView locationText;
+
     private static Locations knownLocations;
     private TextView termsTextView;
     private TextView privacyTextView;
 
-
-    private static RelativeLayout enableLocation;
+    private static RelativeLayout currentLocationContainer;
+    private static ImageView locationIcon;
+    private static TextView locationName;
 
     private NavigationView navigationView;
 
@@ -98,52 +101,6 @@ public class MainActivity extends AppCompatActivity
         //registering our receiver
         this.registerReceiver(mReceiver, intentFilter);
 
-       /* navigationView.setItemIconTintList(null);
-        navigationView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                int id = item.getItemId();
-                item.setChecked(true);
-            switch (id){
-
-                case R.id.nav_locations: {
-                    item.setIcon(getResources().getDrawable(R.drawable.ic_trips_on));
-                    navigationView.getMenu().getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_drives_off));
-                    navigationView.getMenu().getItem(0).setChecked(false);
-                    loadKnownLocationsInUI();
-                    break;
-                }
-
-                case R.id.nav_version: {
-                    navigationView.getMenu().getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_drives_off));
-                    navigationView.getMenu().getItem(1).setIcon(getResources().getDrawable(R.drawable.ic_trips_off));
-                    ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                    clipboard.setText(LoopSDK.userId);
-                    openUrlInBrowser(Loop_URL);
-                    return false;
-                }
-            }
-
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
-            }
-            return true;
-            }
-        });
-*/
-        Menu m = navigationView.getMenu();
-        for (int i=0;i < m.size(); i++) {
-            MenuItem mi = m.getItem(i);
-            //the method we have create in activity
-            ViewUtils.applyFontToMenuItem(this, mi,"Roboto-Medium");
-            if (mi.getItemId() == R.id.nav_version){
-              //  mi.setTitle(BuildConfig.VERSION_NAME);
-            }
-        }
-
         knownLocations = Locations.createAndLoad(Locations.class, KnownLocation.class);
         List<KnownLocation> locations = new ArrayList<KnownLocation>(knownLocations.sortedByScore());
         adapter = new LocationsViewAdapter(this,
@@ -155,11 +112,6 @@ public class MainActivity extends AppCompatActivity
         knownLocations.registerItemChangedCallback("Locations", new IProfileItemChangedCallback() {
             @Override
             public void onItemChanged(String entityId) {
-            }
-            @Override
-            public void onItemAdded(String entityId) {
-                SampleAppApplication.mixpanel.track("Known Location created");
-
                 final KnownLocation location = knownLocations.byEntityId(entityId);
                 if (!location.hasLabels()){
                     LoopApiHelper.getLocale(location.latDegrees, location.longDegrees, new ILoopServiceCallback<LoopLocale>() {
@@ -173,15 +125,19 @@ public class MainActivity extends AppCompatActivity
                     });
                 }
             }
+            @Override
+            public void onItemAdded(String entityId) {
+                SampleAppApplication.mixpanel.track("Known Location created");
+            }
 
             @Override
             public void onItemRemoved(String entityId) {}
         });
 
 
-
-        locationText = (TextView) this.findViewById(R.id.txtlocationtracking);
-        enableLocation = (RelativeLayout) this.findViewById(R.id.locationstrackingcontainer);
+        locationName = (TextView) this.findViewById(R.id.txtlocationtracking);
+        currentLocationContainer = (RelativeLayout) this.findViewById(R.id.locationstrackingcontainer);
+        locationIcon = (ImageView) this.findViewById(R.id.locationIcon);
 
         termsTextView = (TextView) navigationView.findViewById(R.id.terms);
 
@@ -202,18 +158,9 @@ public class MainActivity extends AppCompatActivity
         });
 
         String[] ids = getResources().getStringArray(R.array.navigationmenu);
-        final ListView lv1 = (ListView) findViewById(R.id.custom_list);
-        lv1.setAdapter(new NavigationViewAdapter(this, ids));
-        lv1.setItemsCanFocus(false);
-        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Object o = lv1.getItemAtPosition(position);
-                NavigationViewItem newsData = (NavigationViewItem) o;
-                Toast.makeText(MainActivity.this, "Selected :" + " " + newsData, Toast.LENGTH_LONG).show();
-            }
-        });
-
+        final ListView navigationList = (ListView) findViewById(R.id.custom_list);
+        navigationList.setAdapter(new NavigationViewAdapter(this, ids));
+        navigationList.setItemsCanFocus(false);
         loadKnownLocations();
     }
 
@@ -280,34 +227,35 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void loadKnownLocationsInUI() {
-       // knownLocations.load();
-        final TextView titleTextView = (TextView) findViewById(R.id.toolbar_title);
-        String title = "";
-        List<KnownLocation> locations = new ArrayList<>();
-        Menu m = navigationView.getMenu();
-        for (int i = 0; i < m.size(); i++) {
-            MenuItem mi = m.getItem(i);
-           /* if (mi.isChecked() && mi.getItemId() == R.id.nav_drives) {
-                drives = new ArrayList<Trip>(localDrives.sortedByStartedAt());
-                title = "DRIVES";
-                break;
-
-            } else */if (mi.isChecked() && (mi.getItemId() == R.id.nav_locations || mi.getItemId() == R.id.nav_version)) {
-                locations = new ArrayList<KnownLocation>(knownLocations.sortedByScore());
-                title = "LOCATIONS";
-                break;
-            }
-        }
-
-        final List<KnownLocation> finalDrives = new ArrayList<KnownLocation>(knownLocations.sortedByScore());;
-        final String finalTitle = title;
+        knownLocations.load();
+        final List<KnownLocation> locations = new ArrayList<KnownLocation>(knownLocations.sortedByScore());;
 
         runOnUiThread(new Runnable() {
             public void run() {
-              //  titleTextView.setText(finalTitle);
-                adapter.update(finalDrives);
+                adapter.update(locations);
             }
         });
+
+        Location currentLocation = LoopLocationProvider.getLastLocation();
+        if (currentLocation !=null){
+            for (KnownLocation location: knownLocations.sortedByScore()){
+                if (location.isLocationInsideRadius(currentLocation)){
+                    currentLocationContainer.setVisibility(View.VISIBLE);
+                    String label = "UNKNOWN";
+                    if (location.hasLabels()){
+                        label = location.labels.getTopLabel().name;
+                    }
+                    locationName.setText(label);
+                    if (label.equalsIgnoreCase("home")){
+                        locationIcon.setImageResource(R.drawable.home);
+                    }
+                    else if (label.equalsIgnoreCase("work")){
+                            locationIcon.setImageResource(R.drawable.work);
+                        }
+                    }
+                    break;
+                }
+            }
     }
 
     public void openUrlInBrowser(String url){

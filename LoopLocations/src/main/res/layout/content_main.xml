@@ -25,7 +25,8 @@
         android:layout_height="50dp"
         android:layout_below="@+id/imageView2"
         android:paddingLeft="15dp"
-        android:paddingRight="16dp">
+        android:paddingRight="16dp"
+        android:visibility="gone">
 
         <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/txtlocationtracking"
@@ -81,17 +82,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/locationsettingcontainer"
-        android:background="@color/listbackground">
+        android:background="@color/defaultbackground">
 
         <ListView
             android:id="@+id/tripslist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:divider="@color/splash_background"
             android:dividerHeight="1dp"
             android:layerType="software"
             android:listSelector="@color/colorPrimary"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            android:background="@color/listbackground"/>
     </RelativeLayout>
 
 </RelativeLayout>

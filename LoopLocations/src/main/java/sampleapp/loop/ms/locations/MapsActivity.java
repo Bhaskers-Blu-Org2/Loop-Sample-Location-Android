@@ -14,8 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -50,54 +54,54 @@ import ms.loop.loopsdk.profile.Trip;
 import ms.loop.loopsdk.profile.Trips;
 import ms.loop.loopsdk.profile.Visit;
 import sampleapp.loop.ms.locations.utils.LocationView;
+import sampleapp.loop.ms.locations.utils.ResizeAnimation;
 import sampleapp.loop.ms.locations.utils.VisitView;
 
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private String entityId;
     private Locations locations;
-
     KnownLocation knownLocation;
     LocationView locationView;
     private ImageView backAction;
-    //private ImageView deleteDriveAction;
 
     final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
     final SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm", Locale.US);
+
     private VisitsViewAdapter adapter;
     private ListView visitListView;
+    private SupportMapFragment mapFragment;
+    private FrameLayout mapFragmentLayout;
+    private View visitContainer;
+    private Marker selectedMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mapFragmentLayout =  (FrameLayout) findViewById(R.id.mapcontainer);
+        visitContainer = findViewById(R.id.visit_container);
 
         entityId = this.getIntent().getExtras().getString("locationid");
         locations = Locations.createAndLoad(Locations.class, KnownLocation.class);
 
-        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
-                .findViewById(android.R.id.content)).getChildAt(0);
+        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
 
         locationView = new LocationView(viewGroup);
-
         backAction = (ImageView)findViewById(R.id.action_back_ic);
-       // deleteDriveAction = (ImageView)findViewById(R.id.action_delete_drive_ic);
-
         backAction.setClickable(true);
-
         backAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
 
         knownLocation = locations.byEntityId(entityId);
         if (knownLocation == null) return;
@@ -107,40 +111,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         visitListView = (ListView) findViewById(R.id.visitlist);
         visitListView.setAdapter(adapter);
-
-       /* deleteDriveAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            if (knownLocation != null){
-                knownLocation.delete();
-                finish();
-            }
-            }
-        });*/
-
-        viewGroup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-
-               /* // Adjust start time by 30 minutes
-                Calendar startTime = Calendar.getInstance();
-                startTime.setTime(trip.startedAt);
-                startTime.add(Calendar.MINUTE, -30);
-
-                Calendar endTime = Calendar.getInstance();
-                endTime.setTime(trip.endedAt);
-                endTime.add(Calendar.MINUTE, 30);
-
-                String startedAtDate = dateFormat.format(startTime.getTime());
-                String startedAtHour = hourFormat.format(startTime.getTime());
-                String endedAtDate = dateFormat.format(endTime.getTime());
-                String endedAtHour = hourFormat.format(endTime.getTime());
-                String queryDate = LoopSDK.userId + " AND location AND createdAt:[\"" + startedAtDate + "T" + startedAtHour + "-07:00\" TO \"" + endedAtDate + "T" + endedAtHour + "-07:00\"]";
-                clipboard.setText(queryDate);
-                Toast.makeText(MapsActivity.this, "Elastic search query copied", Toast.LENGTH_SHORT).show();*/
-            }
-        });
     }
 
     @Override
@@ -172,19 +142,62 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         MarkerOptions startMarker = new MarkerOptions();
         startMarker.position(new LatLng(firstPoint.latDegrees,firstPoint.longDegrees)).title(knownLocation.labels.getLabels().get(0).name);
         startMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.location));
+        startMarker.zIndex(5.0f);
 
-        mMap.addMarker(startMarker);
+        selectedMarker = mMap.addMarker(startMarker);
+        selectedMarker.setTag(knownLocation.entityId);
         LatLng latLng = new LatLng(firstPoint.latDegrees, firstPoint.longDegrees);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
 
         for (KnownLocation location: locations.sortedByScore()) {
             if (location.entityId.equals(knownLocation.entityId)) continue;
-            latLng = new LatLng(location.latDegrees,location.longDegrees);
-            MarkerOptions endMarker = new MarkerOptions();
-            endMarker.position(latLng).title(knownLocation.labels.getLabels().get(0).name);
-            endMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.location));
-            mMap.addMarker(endMarker);
+            if (location.isValid() && location.hasVisits()) {
+                latLng = new LatLng(location.latDegrees, location.longDegrees);
+                MarkerOptions endMarker = new MarkerOptions();
+                endMarker.position(latLng).title(location.labels.getLabels().get(0).name);
+                endMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.location));
+                mMap.addMarker(endMarker).setTag(location.entityId);
+            }
         }
+        mMap.setOnMarkerClickListener(this);
+    }
+
+    public void adjustLayout(KnownLocation location){
+
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mapFragmentLayout.getLayoutParams();
+
+        ResizeAnimation a = new ResizeAnimation(mapFragmentLayout, params.weight, location.visits.size() * 0.1f);
+        a.setDuration(250);
+        mapFragmentLayout.startAnimation(a);
+
+
+        //params.weight = location.visits.size() * 0.1f;
+       // float weightForVisitsSection = 1 - params.weight;
+      //  mapFragmentLayout.setLayoutParams(params);
+
+        params = (LinearLayout.LayoutParams) visitContainer.getLayoutParams();
+        a = new ResizeAnimation(visitContainer, params.weight, 1 - location.visits.size() * 0.1f);
+        a.setDuration(250);
+        visitContainer.startAnimation(a);
+
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        selectedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.location));
+        String id = (String)marker.getTag();
+        KnownLocation location = locations.byEntityId(id);
+        locationView.update(this, location);
+        adapter.update(location.visits.getVisits());
+        marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.location_selected));
+        adjustLayout(location);
+        selectedMarker = marker;
+
+        // Return false to indicate that we have not consumed the event and that we wish
+        // for the default behavior to occur (which is for the camera to move such that the
+        // marker is centered and for the marker's info window to open, if it has one).
+        return false;
     }
 
     class VisitsViewAdapter extends ArrayAdapter<Visit> {
@@ -201,14 +214,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         public void update(List<Visit> data) {
-
             visits = data;
             this.notifyDataSetChanged();
         }
 
         @Override
         public int getCount() {
-            return visits.size();
+            return visits.size() - 1;
         }
 
         @Override
@@ -228,7 +240,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             if (visits.isEmpty()) return row;
-            final Visit visit = visits.get(position);
+            final Visit visit = visits.get(visits.size() - position - 2);
             if (visit == null ) return row;
             holder.update(context, visit);
             return row;
