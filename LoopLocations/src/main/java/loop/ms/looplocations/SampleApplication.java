@@ -14,6 +14,7 @@ import ms.loop.loopsdk.core.ILoopSDKCallback;
 import ms.loop.loopsdk.core.LoopSDK;
 import ms.loop.loopsdk.core.LoopServiceManager;
 import ms.loop.loopsdk.processors.KnownLocationProcessor;
+import ms.loop.loopsdk.providers.LoopLocationProvider;
 import ms.loop.loopsdk.signal.Signal;
 import ms.loop.loopsdk.signal.SignalConfig;
 import ms.loop.loopsdk.util.LoopError;
@@ -35,7 +36,6 @@ public class SampleApplication extends Application implements ILoopSDKCallback{
 
         String userId = "YOUR USER ID";
         String deviceId = "YOUR DEVICE ID";
-
         LoopSDK.initialize(this, appId, appToken);
     }
 
@@ -44,7 +44,8 @@ public class SampleApplication extends Application implements ILoopSDKCallback{
         Intent i = new Intent("android.intent.action.onInitialized").putExtra("status", "initialized");
         this.sendBroadcast(i);
 
-        LoopServiceManager.startLocationProvider(SignalConfig.SIGNAL_SEND_MODE_BATCH);
+        LoopServiceManager.startLocationProvider(SignalConfig.SIGNAL_SEND_MODE_REALTIME);
+        LoopLocationProvider.sendLocation(null, "fix");
         knownLocationProcessor = new KnownLocationProcessor();
         knownLocationProcessor.initialize();
         LoopSDK.enableLogging("loggly", BuildConfig.LOGGLY_TOKEN);

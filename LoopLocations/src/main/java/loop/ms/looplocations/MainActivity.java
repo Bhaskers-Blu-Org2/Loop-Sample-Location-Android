@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         if (LoopSDK.isInitialized()) {
             LoopSDK.forceSync();
         }
-        updateCurrentLocation();
+
     }
 
     @Override
