@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:orientation="vertical"
-        android:paddingLeft="16dp"
+        android:paddingLeft="10dp"
         android:paddingTop="7dp"
         android:paddingBottom="7dp">
 
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/locationview_title"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:textColor="@color/locationname"
                 customTextView:fontName="Roboto-Regular"
                 android:paddingLeft="5dp"/>
@@ -43,7 +43,8 @@
 
         <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/txtlastvisited"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
+            android:maxWidth="70dp"
             android:layout_height="fill_parent"
             android:paddingTop="5dp"
             android:text="@string/locationview_title"
@@ -57,8 +58,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingRight="18dp"
-        android:layout_toLeftOf="@+id/RelativeLayout03"
+        android:paddingLeft="10dp"
+        android:layout_toRightOf="@+id/RelativeLayout01"
         android:layout_alignBottom="@+id/RelativeLayout01"
         android:paddingTop="7dp"
         android:paddingBottom="7dp">
@@ -75,7 +76,7 @@
             android:id="@+id/lastvisitentertime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:text="@string/locationview_lat_long"
             android:layout_gravity="bottom"
             android:paddingLeft="3dp"
@@ -89,7 +90,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/small_arrow"
             android:layout_gravity="center"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="8dp"/>
 
         <ImageView
             android:id="@+id/exitIcon"
@@ -97,18 +98,30 @@
             android:layout_height="wrap_content"
             android:src="@drawable/to_circle"
             android:layout_gravity="center"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="8dp"/>
 
         <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/lastvisitexittime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/locationview_last_updated"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:layout_gravity="bottom"
             android:paddingLeft="3dp"
             android:textColor="@color/locationvisittime"
             customTextView:fontName="Roboto-Regular"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_toLeftOf="@+id/RelativeLayout03"
+        android:paddingRight="5dp"
+        android:layout_alignBottom="@+id/RelativeLayout01"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp">
 
         <!-- icon -->
         <ImageView
@@ -117,14 +130,14 @@
             android:layout_height="wrap_content"
             android:src="@drawable/duration"
             android:layout_gravity="center"
-            android:paddingLeft="9dp"/>
+            android:paddingLeft="10dp"/>
 
         <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/visitduration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/locationview_score"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:layout_gravity="bottom"
             android:paddingLeft="3dp"
             android:textColor="@color/locationvisittime"
@@ -134,14 +147,13 @@
 
     <LinearLayout
         android:id="@+id/RelativeLayout03"
-        android:layout_width="60dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentRight="true"
         android:background="@color/visitsbackground"
         android:paddingTop="7dp"
-        android:paddingBottom="7dp"
-        >
+        android:paddingBottom="7dp">
 
         <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/visitcount"

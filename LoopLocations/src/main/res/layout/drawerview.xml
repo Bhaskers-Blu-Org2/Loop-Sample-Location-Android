@@ -8,8 +8,9 @@
         android:id="@+id/menutitle"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_alignParentLeft="true"
+        android:textColor="#707070"
         customTextView:fontName="RobotoCondensed-Regular">
     </sampleapp.loop.ms.locations.utils.CustomTextView>
 

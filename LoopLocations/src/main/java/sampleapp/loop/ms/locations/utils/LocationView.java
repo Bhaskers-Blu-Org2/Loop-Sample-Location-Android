@@ -57,7 +57,7 @@ public class LocationView {
     }
     public void update(Context context, KnownLocation  location){
         String locationLabel = getLocationLabels(location);
-        txtLocantionName.setText(locationLabel);
+        txtLocantionName.setText(locationLabel.toUpperCase());
         locationIcon.setImageResource(locationLabel.equalsIgnoreCase("work")? R.drawable.work : R.drawable.home);
         txtVisitCount.setText(""+location.visits.size());
 
@@ -100,13 +100,11 @@ public class LocationView {
         diff[0] = (diffInSeconds = (diffInSeconds / 60)) >= 24 ? diffInSeconds % 24 : diffInSeconds;
 
         return String.format(Locale.US,
-                "%s%d:%s%d:%s%d",
+                "%s%d:%s%d",
                 diff[0] < 9 ? "0" : "",
                 diff[0],
                 diff[1] < 9 ? "0": "",
-                diff[1],
-                diff[2] < 9 ? "0":"",
-                diff[2]);
+                diff[1]);
     }
 
     private String getLocationLabels(KnownLocation location) {

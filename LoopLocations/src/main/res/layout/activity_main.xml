@@ -43,19 +43,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity= "center_vertical"
-            android:paddingLeft="15dp"
+            android:paddingLeft="12dp"
             android:text="TERMS"
-            customTextView:fontName="Roboto-Medium"
-            android:textSize="12sp" />
+            customTextView:fontName="RobotoCondensed-Regular"
+            android:textColor="#B2000000"
+            android:textSize="11sp" />
 
         <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
+            android:paddingLeft="12dp"
             android:text="PRIVACY"
-            customTextView:fontName="Roboto-Medium"
-            android:textSize="12sp" />
+            customTextView:fontName="RobotoCondensed-Regular"
+            android:textColor="#B2000000"
+            android:textSize="11sp" />
 
         <sampleapp.loop.ms.locations.utils.CustomTextView
             android:id="@+id/copyrights"
@@ -63,8 +65,9 @@
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
             android:text=" &#169; 2016 MICROSOFT"
-            customTextView:fontName="Roboto-Medium"
-            android:textSize="12sp" />
+            customTextView:fontName="RobotoCondensed-Regular"
+            android:textColor="#7F000000"
+            android:textSize="11sp" />
 
 
     </LinearLayout>

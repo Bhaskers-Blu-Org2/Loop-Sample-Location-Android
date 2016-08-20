@@ -1,6 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('../Next.keystore')
+            storePassword 'Scp12345678'
+            keyAlias "Next"
+            keyPassword "Scp12345678"
+        }
+    }
+
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
@@ -21,6 +30,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //signingConfig signingConfigs.release
+
         }
     }
 
@@ -32,7 +43,7 @@ android {
         // set to true to turn off analysis progress reporting by lint
         quiet false
         // if true, stop the gradle build if errors are found
-        abortOnError true
+        abortOnError false
         // if true, only report errors
         ignoreWarnings false
         // project specific lint options

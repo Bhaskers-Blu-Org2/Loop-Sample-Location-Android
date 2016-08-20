@@ -48,6 +48,7 @@ import ms.loop.loopsdk.profile.Drive;
 import ms.loop.loopsdk.profile.Drives;
 import ms.loop.loopsdk.profile.GeospatialPoint;
 import ms.loop.loopsdk.profile.KnownLocation;
+import ms.loop.loopsdk.profile.Label;
 import ms.loop.loopsdk.profile.Locations;
 import ms.loop.loopsdk.profile.Path;
 import ms.loop.loopsdk.profile.Trip;
@@ -154,7 +155,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (location.isValid() && location.hasVisits()) {
                 latLng = new LatLng(location.latDegrees, location.longDegrees);
                 MarkerOptions endMarker = new MarkerOptions();
-                endMarker.position(latLng).title(location.labels.getLabels().get(0).name);
+                String labelStr = "UnKnown";
+                Label label = location.labels.getTopLabel();
+                if (label != null) labelStr = label.name;
+                endMarker.position(latLng).title(labelStr);
                 endMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.location));
                 mMap.addMarker(endMarker).setTag(location.entityId);
             }

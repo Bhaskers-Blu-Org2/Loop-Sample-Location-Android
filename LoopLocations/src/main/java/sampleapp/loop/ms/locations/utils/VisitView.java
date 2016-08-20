@@ -26,7 +26,7 @@ public class VisitView {
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE", Locale.US);
     private SimpleDateFormat dateFormat2 = new SimpleDateFormat("EEE (MM/dd)", Locale.US);
-    private SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.US);
+    private SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a", Locale.US);
 
     public VisitView(View view) {
 
