@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-       // navigationView.setNavigationItemSelectedListener(this);
+        // navigationView.setNavigationItemSelectedListener(this);
 
         IntentFilter intentFilter = new IntentFilter("android.intent.action.onInitialized");
         mReceiver = new BroadcastReceiver() {
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new LocationsViewAdapter(this,
                 R.layout.locationview, locations);
 
-        tripListView = (ListView)findViewById(R.id.tripslist);
+        tripListView = (ListView) findViewById(R.id.tripslist);
         tripListView.setAdapter(adapter);
 
         locationName = (TextView) this.findViewById(R.id.txtlocationName);
@@ -153,10 +153,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
 
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -167,14 +168,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void loadKnownLocations()
-    {
+    public void loadKnownLocations() {
         if (LoopUtils.getLocations().size() > 0 || !LoopSDK.isInitialized() || TextUtils.isEmpty(LoopSDK.userId)) {
             loadKnownLocationsInUI();
             return;
         }
 
-        LoopUtils.downloadLocations( new IProfileDownloadCallback() {
+        LoopUtils.downloadLocations(new IProfileDownloadCallback() {
             @Override
             public void onProfileDownloadComplete(int itemCount) {
                 loadKnownLocationsInUI();
@@ -201,7 +201,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadKnownLocationsInUI() {
         LoopUtils.loadItems();
-        final List<KnownLocation> locations = new ArrayList<KnownLocation>(LoopUtils.getLocations());;
+        final List<KnownLocation> locations = new ArrayList<KnownLocation>(LoopUtils.getLocations());
+        ;
 
         runOnUiThread(new Runnable() {
             public void run() {
@@ -210,50 +211,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Location currentLocation = LoopLocationProvider.getLastLocation();
-        if (currentLocation !=null){
-            for (KnownLocation location: locations){
-                if (location.isLocationInsideRadius(currentLocation)){
+        if (currentLocation != null) {
+            for (KnownLocation location : locations) {
+                if (location.isLocationInsideRadius(currentLocation)) {
                     currentLocationContainer.setVisibility(View.VISIBLE);
                     String label = "UNKNOWN";
-                    if (location.hasLabels()){
+                    if (location.hasLabels()) {
                         label = location.labels.getTopLabel().name;
                     }
                     locationName.setText(label.toUpperCase());
-                    if (label.equalsIgnoreCase("home")){
+                    if (label.equalsIgnoreCase("home")) {
                         locationIcon.setImageResource(R.drawable.home);
+                    } else if (label.equalsIgnoreCase("work")) {
+                        locationIcon.setImageResource(R.drawable.work);
                     }
-                    else if (label.equalsIgnoreCase("work")){
-                            locationIcon.setImageResource(R.drawable.work);
-                        }
                     break;
-                    }
-
                 }
             }
+        }
     }
 
-    public void openUrlInBrowser(String url){
+    public void openUrlInBrowser(String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
     }
-
-    /*public String checkSelectedItemType() {
-        final TextView titleTextView = (TextView) findViewById(R.id.toolbar_title);
-        return (String) titleTextView.getText();
-    }*/
-
-
-
-   /* public static boolean isKnownLocation(String entityId, String knownLocationType)
-    {
-        KnownLocation knownLocation = knownLocations.byEntityId(entityId);
-        if (knownLocation == null || !knownLocation.isValid()) return false;
-        Labels labels = knownLocation.labels;
-
-        for (Label label:labels){
-            if (label.name.equalsIgnoreCase(knownLocationType))
-                return true;
-        }
-        return false;
-    }*/
 }

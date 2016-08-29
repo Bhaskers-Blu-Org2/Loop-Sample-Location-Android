@@ -127,12 +127,11 @@ public class NavigationViewAdapter extends BaseAdapter {
                 LoopSDK.deleteUser(new ILoopServiceCallback<Void>() {
                     @Override
                     public void onSuccess(Void value) {
-                        SampleAppApplication.instance.uninitailzeLoop();
+                        SampleAppApplication.instance.uninitializeLoop();
                     }
 
                     @Override
-                    public void onError(LoopError error) {
-                    }
+                    public void onError(LoopError error) {}
                 });
             }
         } else {

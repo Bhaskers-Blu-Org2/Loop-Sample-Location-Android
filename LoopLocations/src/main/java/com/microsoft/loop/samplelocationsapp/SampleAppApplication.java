@@ -237,7 +237,7 @@ public class SampleAppApplication extends MultiDexApplication implements ILoopSD
     public boolean isLoopEnabled(){
         return getBooleanSharedPrefValue(this, "helpusimprove", true);
     }
-    public void uninitailzeLoop(){
+    public void uninitializeLoop(){
         SampleAppApplication.setSharedPrefValue(this, "helpusimprove", false);
         LoopSDK.unInitialize();
         sdkInitialized = false;
