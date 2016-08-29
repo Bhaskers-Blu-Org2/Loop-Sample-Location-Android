@@ -1,161 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:customTextView="https://schemas.android.com/apk/res/trips.sampleapp.loop.ms.tripssampleapp.utils"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:customTextView="https://schemas.android.com/apk/res/com.microsoft.loop.samplelocationsapp.utils"
     android:id="@+id/listcontainer"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
     android:weightSum="1">
 
-    <LinearLayout
-        android:id="@+id/RelativeLayout01"
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:orientation="vertical"
+        android:layout_weight="0.92"
+        android:paddingBottom="12dp"
         android:paddingLeft="10dp"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp">
+        android:paddingTop="12dp">
+
+        <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:weightSum="1">
 
         <LinearLayout
             android:id="@+id/RelativeLayout04"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="0.5">
 
             <ImageView
                 android:id="@+id/locationicon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/home"
+                android:src="@drawable/location_small"
                 android:layout_gravity="center"/>
 
-            <sampleapp.loop.ms.locations.utils.CustomTextView
-                android:id="@+id/locationName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/locationview_title"
-                android:textSize="14sp"
-                android:textColor="@color/locationname"
-                customTextView:fontName="Roboto-Regular"
-                android:paddingLeft="5dp"/>
+                <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
+                    android:id="@+id/locationName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/locationview_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/locationname"
+                    customTextView:fontName="Roboto-Regular"
+                    android:paddingLeft="3dp" />
+
+                <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
+                    android:id="@+id/sample_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="7dp"
+                    android:paddingRight="5dp"
+                    android:text="SAMPLE"
+                    android:visibility="gone"
+                    customTextView:fontName="DroidSansMono"
+                    android:textColor="#ffffff"
+                    android:background="@color/drawerIcon"
+                    android:textSize="9sp"
+                    android:layout_gravity="center"/>
+
         </LinearLayout>
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
-            android:id="@+id/txtlastvisited"
-            android:layout_width="70dp"
-            android:maxWidth="70dp"
-            android:layout_height="fill_parent"
-            android:paddingTop="5dp"
-            android:text="@string/locationview_title"
-            android:textColor="@color/locationvisittime"
-            android:textSize="12sp"
-            customTextView:fontName="Roboto-Regular"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/RelativeLayout02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:layout_toRightOf="@+id/RelativeLayout01"
-        android:layout_alignBottom="@+id/RelativeLayout01"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp">
-
-        <ImageView
-            android:id="@+id/enterIcon"
+        <LinearLayout
+            android:id="@+id/RelativeLayout01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/from_circle"
-            android:layout_gravity="center"
-            />
+            android:orientation="vertical"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:layout_weight="0.5">
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
-            android:id="@+id/lastvisitentertime"
+            <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
+                android:id="@+id/txtlastvisited"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="@string/locationview_title"
+                android:textColor="@color/locationvisittime"
+                android:textSize="12sp"
+                customTextView:fontName="Roboto-Regular"/>
+
+        </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:text="@string/locationview_lat_long"
-            android:layout_gravity="bottom"
-            android:paddingLeft="3dp"
-            android:textColor="@color/locationvisittime"
-            customTextView:fontName="Roboto-Regular"/>
+            android:paddingTop="7dp"
+            android:weightSum="1">
 
-        <!-- icon -->
-        <ImageView
-            android:id="@+id/enterarrow"
+           <LinearLayout
+            android:id="@+id/RelativeLayout06"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/small_arrow"
-            android:layout_gravity="center"
-            android:paddingLeft="8dp"/>
+            android:layout_height="match_parent"
+            android:layout_weight="0.7">
 
-        <ImageView
-            android:id="@+id/exitIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/to_circle"
-            android:layout_gravity="center"
-            android:paddingLeft="8dp"/>
+               <ImageView
+                android:id="@+id/enterIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/from_circle"
+                android:layout_gravity="center" />
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
-            android:id="@+id/lastvisitexittime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/locationview_last_updated"
-            android:textSize="13sp"
-            android:layout_gravity="bottom"
-            android:paddingLeft="3dp"
-            android:textColor="@color/locationvisittime"
-            customTextView:fontName="Roboto-Regular"/>
 
-    </LinearLayout>
+               <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
+                   android:id="@+id/lastvisitentertime"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="bottom"
+                   android:paddingLeft="3dp"
+                   android:text="@string/locationview_lat_long"
+                   android:textColor="@color/locationvisittime"
+                   android:textSize="13sp"
+                   customTextView:fontName="Roboto-Regular" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_toLeftOf="@+id/RelativeLayout03"
-        android:paddingRight="5dp"
-        android:layout_alignBottom="@+id/RelativeLayout01"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp">
+                <ImageView
+                    android:id="@+id/enterarrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/small_arrow"
+                    android:layout_gravity="center"
+                    android:paddingLeft="8dp"/>
 
-        <!-- icon -->
-        <ImageView
-            android:id="@+id/durionIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/duration"
-            android:layout_gravity="center"
-            android:paddingLeft="10dp"/>
+                <ImageView
+                    android:id="@+id/exitIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/to_circle"
+                    android:layout_gravity="center"
+                    android:paddingLeft="8dp"/>
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
-            android:id="@+id/visitduration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/locationview_score"
-            android:textSize="13sp"
-            android:layout_gravity="bottom"
-            android:paddingLeft="3dp"
-            android:textColor="@color/locationvisittime"
-            customTextView:fontName="Roboto-Regular"/>
+                <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
+                    android:id="@+id/lastvisitexittime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/locationview_last_updated"
+                    android:textSize="13sp"
+                    android:layout_gravity="bottom"
+                    android:paddingLeft="3dp"
+                    android:textColor="@color/locationvisittime"
+                    customTextView:fontName="Roboto-Regular"/>
+           </LinearLayout>
+            <LinearLayout
+                android:id="@+id/RelativeLayout05"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="right"
+                android:paddingRight="10dp">
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/durionIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/duration"
+                    android:layout_gravity="center" />
+
+                <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
+                    android:id="@+id/visitduration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/locationview_score"
+                    android:textSize="13sp"
+                    android:layout_gravity="bottom"
+                    android:paddingLeft="3dp"
+                    android:textColor="@color/locationvisittime"
+                    customTextView:fontName="Roboto-Regular"/>
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
 
     <LinearLayout
         android:id="@+id/RelativeLayout03"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentRight="true"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
         android:background="@color/visitsbackground"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp">
+        android:layout_weight="0.08"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
+           <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
             android:id="@+id/visitcount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -167,7 +194,7 @@
             android:textColor="@color/visitcount"
             customTextView:fontName="Roboto-Regular"/>
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
+        <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
             android:id="@+id/visitlable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -180,4 +207,5 @@
             customTextView:fontName="Roboto-Light"/>
 
     </LinearLayout>
-</RelativeLayout>
+
+</LinearLayout>

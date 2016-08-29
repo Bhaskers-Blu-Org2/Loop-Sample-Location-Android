@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    xmlns:customTextView="https://schemas.android.com/apk/res/trips.sampleapp.loop.ms.tripssampleapp.utils"
+    xmlns:customTextView="https://schemas.android.com/apk/res/com.microsoft.loop.samplelocationsapp.utils"
     android:layout_height="200dp"
     android:padding="25dp">
-    <sampleapp.loop.ms.locations.utils.CustomTextView
+    <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
         android:id="@+id/menutitle"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:textColor="#707070"
         customTextView:fontName="RobotoCondensed-Regular">
-    </sampleapp.loop.ms.locations.utils.CustomTextView>
+    </com.microsoft.loop.samplelocationsapp.utils.CustomTextView>
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/switch_compat"

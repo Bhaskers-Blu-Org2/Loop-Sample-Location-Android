@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:customTextView="https://schemas.android.com/apk/res/trips.sampleapp.loop.ms.tripssampleapp.utils"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:customTextView="https://schemas.android.com/apk/res/com.microsoft.loop.samplelocationsapp.utils"
     android:id="@+id/listcontainer"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -10,34 +10,35 @@
     <LinearLayout
         android:id="@+id/RelativeLayout01"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:orientation="vertical"
-        android:paddingBottom="7dp"
+        android:layout_height="match_parent"
         android:paddingLeft="10dp"
-        android:paddingTop="7dp">
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:layout_weight="0.10"
+        android:gravity="left">
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
+        <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
             android:id="@+id/txtlastvisited"
             android:layout_width="70dp"
-            android:layout_height="fill_parent"
-            android:paddingTop="5dp"
+            android:layout_height="wrap_content"
             android:text="@string/locationview_title"
             android:textColor="@color/locationvisittime"
-            android:textSize="13sp"
-            customTextView:fontName="Roboto-Regular" />
+            android:textSize="12sp"
+            customTextView:fontName="Roboto-Regular"
+            android:layout_gravity="left"
+            android:gravity="left"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/RelativeLayout02"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:paddingLeft="12dp"
-        android:layout_toRightOf="@+id/RelativeLayout01"
-        android:layout_alignBottom="@+id/RelativeLayout01"
         android:paddingTop="7dp"
-        android:paddingBottom="7dp">
+        android:paddingBottom="7dp"
+        android:layout_weight="0.65"
+        android:gravity="left"
+        android:layout_gravity="left">
 
         <ImageView
             android:id="@+id/enterIcon"
@@ -46,18 +47,17 @@
             android:src="@drawable/from_circle"
             android:layout_gravity="center" />
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
+            <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
             android:id="@+id/lastvisitentertime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13sp"
             android:text="@string/locationview_lat_long"
-            android:layout_gravity="bottom"
-            android:paddingLeft="3dp"
+            android:layout_gravity="center"
+            android:paddingLeft="5dp"
             customTextView:fontName="Roboto-Regular"/>
 
-        <!-- icon -->
-        <ImageView
+            <ImageView
             android:id="@+id/enterarrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             android:layout_gravity="center"
             android:paddingLeft="8dp"/>
 
-        <ImageView
+            <ImageView
             android:id="@+id/exitIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,14 +73,14 @@
             android:layout_gravity="center"
             android:paddingLeft="8dp"/>
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
+            <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
             android:id="@+id/lastvisitexittime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/locationview_last_updated"
             android:textSize="13sp"
-            android:layout_gravity="bottom"
-            android:paddingLeft="3dp"
+            android:layout_gravity="center"
+            android:paddingLeft="5dp"
             customTextView:fontName="Roboto-Regular"/>
 
     </LinearLayout>
@@ -88,33 +88,34 @@
     <LinearLayout
         android:id="@+id/RelativeLayout03"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_alignParentRight="true"
-        android:paddingRight="24dp"
+        android:paddingRight="15dp"
         android:layout_alignBottom="@+id/RelativeLayout01"
         android:paddingTop="7dp"
-        android:paddingBottom="7dp">
+        android:paddingBottom="7dp"
+        android:layout_weight="0.25"
+        android:layout_gravity="bottom"
+        android:gravity="right">
 
-        <!-- icon -->
         <ImageView
             android:id="@+id/durionIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/duration"
-            android:layout_gravity="center"
-            android:paddingLeft="5dp"/>
+            android:layout_gravity="center" />
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
+        <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
             android:id="@+id/visitduration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/locationview_score"
             android:textSize="13sp"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center"
             android:paddingLeft="3dp"
             android:textColor="@color/locationvisittime"
             customTextView:fontName="Roboto-Regular"/>
 
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

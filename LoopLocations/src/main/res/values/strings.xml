@@ -39,7 +39,6 @@
     <string name="clearalllocations">CLEAR ALL LOCATIONS</string>
     <string name="learnmore">LEARN MORE</string>
     <string name="locationtracker">LOCATION TRACKER</string>
-    <string name="title_activity_maps3">Map</string>
-    <string name="title_activity_maps4">Map</string>
+    <string name="helpusimprove">HELP US IMPROVE</string>
 
 </resources>

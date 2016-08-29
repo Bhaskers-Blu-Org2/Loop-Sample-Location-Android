@@ -1,38 +1,53 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+def mapsApiKey = LOCATIONS_APP_MAPS_KEY_PROP?: "";
+def fabricKey = FABRIC_KEY_PROP?: "";
+
 
 android {
-    signingConfigs {
-        release {
-            storeFile file('../Next.keystore')
-            storePassword 'Scp12345678'
-            keyAlias "Next"
-            keyPassword "Scp12345678"
-        }
-    }
 
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "sampleapp.loop.ms.locations"
+        applicationId "com.microsoft.loop.samplelocationsapp"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 1
-        versionName "0.7.29"
+        versionCode 1004
+        versionName "1.0.0"
         multiDexEnabled true
 
         buildConfigField 'String', 'APP_ID', '\"' + LOCATIONS_APP_ID_PROP + '\"'
         buildConfigField 'String', 'APP_TOKEN', '\"' + LOCATIONS_APP_TOKEN_PROP + '\"'
         buildConfigField 'String', 'LOGGLY_TOKEN', '\"' + LOGGLY_TOKEN + '\"'
-        buildConfigField 'String', 'MIXPANEL_TOKEN', '\"' + MIXPANEL_TOKEN + '\"'
+        buildConfigField 'String', 'MIXPANEL_TOKEN', '\"' + LOCATIONS_MIXPANEL_TOKEN + '\"'
+        manifestPlaceholders = [ mapsApiKey:mapsApiKey, fabricKey:fabricKey]
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            //signingConfig signingConfigs.release
-
         }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
     }
 
     dexOptions {
@@ -54,7 +69,7 @@ android {
         variant.outputs.each { output ->
             output.outputFile = new File(
                     output.outputFile.parent,
-                    output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
+                    output.outputFile.name.replace(".apk", ".apk"))
         }
     }
 }
@@ -64,8 +79,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-maps:9.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'ms.loop:loopsdk:2.0.8-develop'
+    compile 'ms.loop:loopsdk:2.0.9-develop'
     compile 'com.android.support:design:23.4.0'
     compile 'com.mixpanel.android:mixpanel-android:4.+'
     compile 'com.google.android.gms:play-services:9.4.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.2@aar') {
+        transitive = true;
+    }
 }

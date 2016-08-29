@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:customTextView="https://schemas.android.com/apk/res/trips.sampleapp.loop.ms.tripssampleapp.utils"
+    xmlns:customTextView="https://schemas.android.com/apk/res/com.microsoft.loop.samplelocationsapp.utils"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="@color/black"
@@ -19,7 +19,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
-        <sampleapp.loop.ms.locations.utils.CustomTextView
+        <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
             android:id="@+id/txtlocationtracking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
