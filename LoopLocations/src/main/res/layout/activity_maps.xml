@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:customTextView="https://schemas.android.com/apk/res/com.microsoft.loop.samplelocationsapp.utils"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:animateLayoutChanges="true">
+
+    <FrameLayout
+        android:id="@+id/mapcontainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="start"
+        android:layout_weight="0.4">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:context="sampleapp.loop.ms.locations.MapsActivity" />
+
+        <ImageView
+            android:id="@+id/action_back_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/back_to_main"
+            android:paddingLeft="15dp"
+            android:paddingRight="5dp"
+            android:paddingTop="18dp"
+            android:src="@drawable/ic_navigation_back" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/visit_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/locationview"
+        android:layout_weight="0.6">
+
+        <RelativeLayout
+            android:id="@+id/locationview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/locationview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/border"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/locationview"
+            android:background="@color/splash_background" />
+
+        <ListView
+            android:id="@+id/visitlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/border"
+            android:background="@color/defaultbackground"
+            android:divider="@color/splash_background"
+            android:dividerHeight="0dp"
+            android:layerType="software"
+            android:listSelector="@color/colorPrimary"
+            android:scrollbars="none" />
+
+        <RelativeLayout
+            android:id="@+id/no_visitcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_below="@+id/border">
+
+            <ImageView
+                android:id="@+id/no_visit_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/location_no_visit"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"/>
+
+            <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
+                android:id="@+id/txt_no_visit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/no_visit_icon"
+                android:textAlignment="center"
+                android:text="No other visits recorded"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/locationvisitdate"
+                android:textSize="15sp"
+                customTextView:fontName="Roboto-Regular"
+                android:layout_marginTop="15dp"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

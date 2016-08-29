@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:customTextView="https://schemas.android.com/apk/res/com.microsoft.loop.samplelocationsapp.utils"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/defaultbackground"
+    android:layout_marginTop="2dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:ignore="all"
+    tools:showIn="@layout/app_bar_main">
+
+    <RelativeLayout
+        android:id="@+id/locationsettingcontainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/locationstrackingcontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/imageView2"
+        android:paddingLeft="15dp"
+        android:paddingRight="16dp"
+        android:visibility="gone">
+
+        <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
+            android:id="@+id/txtlocationtracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="Current Location"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#647178"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            customTextView:fontName="Roboto-Regular" />
+
+        <!-- icon -->
+        <ImageView
+            android:id="@+id/locationIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/location_small"
+            android:layout_centerVertical="true"
+            android:paddingLeft="8dp"
+            android:layout_toRightOf="@+id/txtlocationtracking"/>
+
+        <com.microsoft.loop.samplelocationsapp.utils.CustomTextView
+            android:id="@+id/txtlocationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:layout_centerVertical="true"
+            android:text="HOME"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#647178"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            customTextView:fontName="Roboto-Regular"
+            android:layout_toRightOf="@+id/locationIcon"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/border"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/splash_background"
+        android:layout_below="@+id/locationstrackingcontainer"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/tripslist_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/locationsettingcontainer"
+        android:background="@color/defaultbackground">
+
+        <ListView
+            android:id="@+id/tripslist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/splash_background"
+            android:dividerHeight="1dp"
+            android:layerType="software"
+            android:listSelector="@color/colorPrimary"
+            android:scrollbars="none"
+            android:background="@color/listbackground"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

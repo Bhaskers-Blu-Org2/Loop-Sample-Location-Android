@@ -1,0 +1,52 @@
+[{
+	"entityId": "testid1",
+	"labels": [{
+		"name": "home",
+		"score": 1
+	}],
+	"lastEntered": "2016-08-16T16:42:27.830-07:00",
+	"latDegrees": 47.643964,
+	"longDegrees": -122.133186,
+	"radiusMeters": 150,
+	"visits": [
+		{
+			"endTime": "2016-08-24T08:30:07.830-07:00",
+			"startTime": "2016-08-23T16:42:29.830-07:00"
+		},
+		{
+			"endTime": "2016-08-25T08:20:45.830-07:00",
+			"startTime": "2016-08-24T16:30:27.830-07:00"
+		},
+		{
+			"endTime": "2016-08-26T08:30:00.830-07:00",
+			"startTime": "2016-08-26T5:00:23.830-07:00"
+		}
+	],
+	"_portalTestUser": true,
+	"userId": "17c62bde-ddf2-4469-9418-b435cdf218fb",
+	"deviceId": null,
+	"updatedAt": "2016-08-16T09:57:17.431Z",
+	"createdAt": "2016-08-16T09:57:17.432Z",
+	"annotations": {
+		"test": "test"
+	}
+}, {
+	"entityId": "testid2",
+	"labels": [],
+	"lastEntered": "2016-08-24T08:50:27.830-07:00",
+	"latDegrees": 47.614816,
+	"longDegrees": -122.194161,
+	"radiusMeters": 150,
+	"visits": [{
+		"endTime": "2016-08-25T16:30:17.830-07:00",
+		"startTime": "2016-08-25T08:50:20.830-07:00"
+	}],
+	"_portalTestUser": true,
+	"userId": "17c62bde-ddf2-4469-9418-b435cdf218fb",
+	"deviceId": null,
+	"updatedAt": "2016-06-21T09:57:18.180Z",
+	"createdAt": "2016-06-21T09:57:18.180Z",
+	"annotations": {
+		"test": "test"
+	}
+}]

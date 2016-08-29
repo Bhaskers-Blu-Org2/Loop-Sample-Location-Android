@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/grp0">
+        <item
+            android:id="@+id/nav_locationtracker"
+            android:title="@string/locationtracker"
+            android:actionMenuTextColor="@color/action_menu_unselected_color"
+            android:textSize="72sp"
+            android:actionLayout="@layout/locationtracker"/>
+
+    </group>
+
+    <group android:id="@+id/grp1">
+        <item
+            android:id="@+id/nav_locations"
+            android:title="@string/clearalllocations"
+            android:actionMenuTextColor="@color/action_menu_unselected_color"
+            android:textSize="72sp"/>
+
+    </group>
+
+    <group android:id="@+id/grp2">
+        <item
+            android:id="@+id/nav_version"
+            android:title="@string/learnmore"
+            android:actionMenuTextColor="@color/action_menu_unselected_color"
+            android:textSize="72sp"/>
+
+    </group>
+</menu>

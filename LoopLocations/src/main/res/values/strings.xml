@@ -1,5 +1,21 @@
 <resources>
-    <string name="app_name">Loop Locations</string>
+    <string name="app_name">Locations</string>
+    <string name="locations">LOCATIONS</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="drives_recording_on">DRIVE RECORDING ON</string>
+    <string name="drives_recording_off">DRIVE RECORDING OFF</string>
+
+    <string name="trips_recording_on">TRIP RECORDING ON</string>
+    <string name="trips_recording_off">TRIP RECORDING OFF</string>
+
+    <string name="delete_drive">Delete Drive</string>
+    <string name="back_to_main">Back to main view</string>
+    <string name="title_activity_maps2">Map</string>
+    <string name="about">ABOUT</string>
+    <string name="title_activity_maps1">Map</string>
+
     <string name="userid">UserId</string>
     <string name="version">App Version</string>
     <string name="loop_enabled">Location observation is on</string>
@@ -11,10 +27,18 @@
     <string name="work_notification_text">You are at Work</string>
     <string name="home_generated_text">Home generated - you are at home</string>
     <string name="work_generated_text">Work generated - you are at work</string>
-    <string name="locationview_visits">visits</string>
+    <string name="locationview_visits">VISITS</string>
+    <string name="locationview_visit">VISIT</string>
     <string name="locationview_list_of_visits">list of visits</string>
     <string name="locationview_score">score</string>
     <string name="locationview_last_updated">last updated</string>
     <string name="locationview_lat_long">lat long</string>
-    <string name="locationview_title">Title</string>
+    <string name="locationview_title">Location</string>
+
+
+    <string name="clearalllocations">CLEAR ALL LOCATIONS</string>
+    <string name="learnmore">LEARN MORE</string>
+    <string name="locationtracker">LOCATION TRACKER</string>
+    <string name="helpusimprove">HELP US IMPROVE</string>
+
 </resources>
