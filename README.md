@@ -6,14 +6,14 @@ These instructions will get you a copy of a Loop sample app that will download u
   0. Get the sample app
     0. Clone this sample app `git clone https://github.com/Microsoft/Loop-Sample-Location-Android.git`
     0. Open it in Android Studio
-    0. Add your appId and appToken in `SampleApplication.java OnCreate`
+    0. Add your appId and appToken in `SampleApplication.java initializeLoopSDK`
 
     ```
         String appId = "YOUR_APP_ID";
         String appToken = "YOUR_APP_TOKEN";
     ```
   0. Create test users in your user dashboard (user link in the left navigation)
-  0. Fill in the userId and deviceId in `LoopTestUserApplication.java OnCreate` with a test user's userId and deviceId obtained from the [Loop Developer Site](https://www.loop.ms)
+  0. Fill in the userId and deviceId in `LoopTestUserApplication.java initializeLoopSDK` with a test user's userId and deviceId obtained from the [Loop Developer Site](https://www.loop.ms)
 
     ```
         String userId = "TEST_USER_USER_ID";
