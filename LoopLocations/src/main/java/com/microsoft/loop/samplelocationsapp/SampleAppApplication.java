@@ -1,22 +1,13 @@
 package com.microsoft.loop.samplelocationsapp;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.graphics.Typeface;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.widget.TextView;
 import android.support.multidex.MultiDexApplication;
 
 import com.crashlytics.android.Crashlytics;
@@ -34,22 +25,18 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.microsoft.loop.samplelocationsapp.utils.LoopUtils;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
-import io.fabric.sdk.android.Fabric;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import io.fabric.sdk.android.Fabric;
 import ms.loop.loopsdk.core.ILoopSDKCallback;
-import ms.loop.loopsdk.core.ISignalListener;
 import ms.loop.loopsdk.core.LoopSDK;
 import ms.loop.loopsdk.processors.DriveProcessor;
 import ms.loop.loopsdk.processors.KnownLocationProcessor;
 import ms.loop.loopsdk.processors.TripProcessor;
-import ms.loop.loopsdk.profile.KnownLocation;
-import ms.loop.loopsdk.profile.Locations;
 import ms.loop.loopsdk.providers.LoopLocationProvider;
-import ms.loop.loopsdk.signal.Signal;
 import ms.loop.loopsdk.signal.SignalConfig;
 import ms.loop.loopsdk.util.LoopError;
 
