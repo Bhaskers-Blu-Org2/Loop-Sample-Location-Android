@@ -75,13 +75,14 @@ public class SampleAppApplication extends MultiDexApplication implements ILoopSD
     public void initializeLoopSDK(){
 
         // initialize the Loop SDK. create an account to get your appId and appToken
-        String appId = ""; // Or replace your id here
-        String appToken = ""; // or replace your app token here
+        String appId = "YOUR_APP_ID";
+        String appToken = "YOUR_APP_TOKEN";
 
         LoopSDK.initialize(this, appId, appToken);
 
-        String userId = "YOUR USER ID";
-        String deviceId = "YOUR DEVICE ID";
+        String userId = "TEST_USER_USER_ID";
+        String deviceId = "TEST_USER_DEVICE_ID";
+        
         //LoopSDK.initialize(this, appId, appToken, userId, deviceId);
 
         setSharedPrefValue(this, "helpusimprove", true);
