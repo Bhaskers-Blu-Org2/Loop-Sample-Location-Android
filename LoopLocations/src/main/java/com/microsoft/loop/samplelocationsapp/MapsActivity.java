@@ -53,7 +53,6 @@ import ms.loop.loopsdk.profile.GeospatialPoint;
 import ms.loop.loopsdk.profile.KnownLocation;
 import ms.loop.loopsdk.profile.Label;
 import ms.loop.loopsdk.profile.Locations;
-import ms.loop.loopsdk.profile.Path;
 import ms.loop.loopsdk.profile.Trip;
 import ms.loop.loopsdk.profile.Trips;
 import ms.loop.loopsdk.profile.Visit;
@@ -113,7 +112,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (knownLocation == null) return;
 
         adapter = new VisitsViewAdapter(this,
-                R.layout.visitview, knownLocation.visits.getVisits());
+                R.layout.visitview, knownLocation.visits);
 
 
 
@@ -232,7 +231,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         String id = (String)marker.getTag();
         KnownLocation location = locations.byEntityId(id);
         locationView.update(this, location);
-        adapter.update(location.visits.getVisits());
+        adapter.update(location.visits);
         marker.setIcon(getLocationIcon(marker.getTitle(), true));
         selectedMarker = marker;
 

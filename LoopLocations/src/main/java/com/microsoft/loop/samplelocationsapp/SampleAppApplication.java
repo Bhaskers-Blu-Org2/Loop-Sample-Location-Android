@@ -80,9 +80,10 @@ public class SampleAppApplication extends MultiDexApplication implements ILoopSD
 
         LoopSDK.initialize(this, appId, appToken);
 
-        String userId = "TEST_USER_USER_ID";
-        String deviceId = "TEST_USER_DEVICE_ID";
-        
+
+        String userId = "YOUR USER ID";
+        String deviceId = "YOUR DEVICE ID";
+
         //LoopSDK.initialize(this, appId, appToken, userId, deviceId);
 
         setSharedPrefValue(this, "helpusimprove", true);
