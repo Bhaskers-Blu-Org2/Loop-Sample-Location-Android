@@ -71,13 +71,13 @@ public class LocationView {
         }
         txtVisitCount.setText(""+location.visits.size());
 
-        List<Visit> visits = location.visits.getVisits();
+        List<Visit> visits = location.visits;
 
         if (visits.size() > 0){
             Visit visit = visits.get(visits.size() -  1);
             txtLastVisited.setText(getLastVisitTime(visit));
-            txtLastVisitEnterTime.setText(timeFormat.format(new Date(visit.startTime)));
-            txtLastVisitExitTime.setText(timeFormat.format(new Date(visit.endTime)));
+            txtLastVisitEnterTime.setText(timeFormat.format(visit.startTime));
+            txtLastVisitExitTime.setText(timeFormat.format(visit.endTime));
             txtVisitDuration.setText(getVisitDuration(visit));
             if (visits.size() > 1){
                 txtVisitLabel.setText(context.getResources().getString(R.string.locationview_visits));
@@ -94,12 +94,12 @@ public class LocationView {
 
     public String getLastVisitTime(Visit visit) {
 
-        if (DateUtils.isToday(visit.startTime)) {
+        if (DateUtils.isToday(visit.startTime.getTime())) {
             return "Today";
-        } else if (ViewUtils.isYesterday(visit.startTime)) {
+        } else if (ViewUtils.isYesterday(visit.startTime.getTime())) {
             return "Yesterday";
         }
-        else if (ViewUtils.isThisWeek(visit.startTime)){
+        else if (ViewUtils.isThisWeek(visit.startTime.getTime())){
             return String.format(Locale.US, "%s", dateFormat.format(visit.startTime));
         }
         return String.format(Locale.US, "%s", dateFormat2.format(visit.startTime));
@@ -107,7 +107,7 @@ public class LocationView {
 
     public String getVisitDuration(Visit visit)
     {
-        long diffInSeconds = (visit.endTime - visit.startTime) / 1000;
+        long diffInSeconds = (visit.endTime.getTime() - visit.startTime.getTime()) / 1000;
 
         long diff[] = new long[] {0, 0, 0 };
         diff[2] = (diffInSeconds >= 60 ? diffInSeconds % 60 : diffInSeconds);

@@ -16,6 +16,11 @@ repositories {
 def mapsApiKey = LOCATIONS_APP_MAPS_KEY_PROP?: "";
 def fabricKey = FABRIC_KEY_PROP?: "";
 
+crashlytics {
+    enableNdk true
+    androidNdkOut 'src/main/obj'
+    androidNdkLibsOut 'src/main/libs'
+}
 
 android {
 
@@ -25,9 +30,9 @@ android {
     defaultConfig {
         applicationId "com.microsoft.loop.samplelocationsapp"
         minSdkVersion 15
-        targetSdkVersion 22
-        versionCode 1004
-        versionName "1.0.0"
+        targetSdkVersion 23
+        versionCode 1005
+        versionName "1.0.1"
         multiDexEnabled true
 
         buildConfigField 'String', 'APP_ID', '\"' + LOCATIONS_APP_ID_PROP + '\"'
@@ -43,8 +48,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -79,7 +84,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-maps:9.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'ms.loop:loopsdk:2.0.2'
+    compile('ms.loop:loopsdk:2.1.0') { changing = true }
     compile 'com.android.support:design:23.4.0'
     compile 'com.mixpanel.android:mixpanel-android:4.+'
     compile 'com.google.android.gms:play-services:9.4.0'

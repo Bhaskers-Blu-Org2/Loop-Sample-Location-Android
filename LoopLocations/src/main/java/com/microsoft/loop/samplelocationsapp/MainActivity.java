@@ -52,8 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import ms.loop.loopsdk.api.LoopApiHelper;
-import ms.loop.loopsdk.core.ILoopServiceCallback;
+
 import ms.loop.loopsdk.core.LoopSDK;
 import ms.loop.loopsdk.profile.IProfileDownloadCallback;
 import ms.loop.loopsdk.profile.IProfileItemChangedCallback;
@@ -79,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
     private static TextView locationName;
     private NavigationView navigationView;
 
-    private static String TOU_URL = "http://go.microsoft.com/fwlink/?LinkID=530144";
-    private static String PRIVACY_URL = "http://go.microsoft.com/fwlink/?LinkId=521839";
+    private static String TOU_URL = "https://go.microsoft.com/fwlink/?LinkID=530144";
+    private static String PRIVACY_URL = "https://go.microsoft.com/fwlink/?LinkId=521839";
 
 
     @Override
@@ -169,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadKnownLocations() {
-        if (LoopUtils.getLocations().size() > 0 || !LoopSDK.isInitialized() || TextUtils.isEmpty(LoopSDK.userId)) {
+        if (LoopUtils.getLocations().size() > 0 || !LoopSDK.isInitialized()) {
             loadKnownLocationsInUI();
             return;
         }
@@ -210,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Location currentLocation = LoopLocationProvider.getLastLocation();
+        Location currentLocation = null;//= LoopLocationProvider.getLastLocation();
         if (currentLocation != null) {
             for (KnownLocation location : locations) {
                 if (location.isLocationInsideRadius(currentLocation)) {

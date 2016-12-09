@@ -21,7 +21,7 @@ import com.microsoft.loop.samplelocationsapp.utils.LoopUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import ms.loop.loopsdk.core.ILoopServiceCallback;
+import ms.loop.loopsdk.api.ILoopApiCallback;
 import ms.loop.loopsdk.core.LoopSDK;
 import ms.loop.loopsdk.profile.KnownLocation;
 import ms.loop.loopsdk.profile.Locations;
@@ -124,7 +124,7 @@ public class NavigationViewAdapter extends BaseAdapter {
     public void toggleHelpUsImprove(boolean isChecked){
         if (!isChecked ) {
             if (LoopSDK.isInitialized()) {
-                LoopSDK.deleteUser(new ILoopServiceCallback<Void>() {
+                LoopSDK.deleteUser(new ILoopApiCallback<Void>() {
                     @Override
                     public void onSuccess(Void value) {
                         SampleAppApplication.instance.uninitializeLoop();
